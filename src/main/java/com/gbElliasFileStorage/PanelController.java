@@ -2,6 +2,7 @@ package com.gbElliasFileStorage;
 
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
@@ -94,4 +95,10 @@ public class PanelController implements Initializable {
 
     }
 
+    public void bthPathUpAction(ActionEvent actionEvent) {//работа кнопки Вверх
+        Path upperPath=Paths.get(PathField.getText()).getParent();
+        if(upperPath!= null){
+            updateList(upperPath);
+        }
+    }
 }

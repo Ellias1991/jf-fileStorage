@@ -23,6 +23,8 @@ public class PanelController implements Initializable {
 
     @FXML
     ComboBox<String>discsBox;
+    @FXML
+    TextField PathField;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -81,6 +83,7 @@ public class PanelController implements Initializable {
     public void updateList(Path path) {//метод который умеет из какого -то пути  по любому пути собрать список файлов
 
         try {
+            PathField.setText(path.normalize().toAbsolutePath().toString());//метод setText позволяет в текстовое поле что-то написать
             filesTable.getItems().clear();//запрос списка элементов,которые лежат в таблице
             filesTable.getItems().addAll(Files.list(path).map(FileInfo::new).collect(Collectors.toList()));
             filesTable.sort();//таблица сортируется по умолчанию

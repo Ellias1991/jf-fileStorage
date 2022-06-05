@@ -21,7 +21,7 @@ public class FileInfo {
             this.name = name;
         }
     }
- private String fileName;
+    private String fileName;
     private FileType type;
     private long size;
     private LocalDateTime lastModified;
@@ -60,8 +60,9 @@ public class FileInfo {
 
 
     public FileInfo(Path path){///c его помощью указываем и на файл,и на директорию.
-        this.fileName=path.getFileName().toString();// из пути вытаскиваем имя файла и преобразуем его к строке
+        // из пути вытаскиваем имя файла и преобразуем его к строке
         try {
+            this.fileName=path.getFileName().toString();
             this.size= Files.size(path);
             this.type= Files.isDirectory(path)? FileType.DIRECTORY: FileType.FILE;
             if (this.type==FileType.DIRECTORY){

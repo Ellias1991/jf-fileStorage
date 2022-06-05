@@ -69,7 +69,7 @@ public class FileInfo {
                 this.size=-1L;
 
             }
-            this.lastModified=LocalDateTime.ofInstant(Files.getLastModifiedTime(path).toInstant(), ZoneOffset.ofHours(0));//как запросить дату последней модификации
+            this.lastModified=LocalDateTime.ofInstant(Files.getLastModifiedTime(path).toInstant(), ZoneOffset.ofHours(3));//как запросить дату последней модификации
         } catch (IOException e) {
             throw new RuntimeException("Unable to create file info from path");
         }

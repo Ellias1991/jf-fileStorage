@@ -3,9 +3,11 @@ package com.gbElliasFileStorage;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
+import javafx.scene.input.MouseEvent;
 
 import java.io.IOException;
 import java.net.URL;
@@ -20,7 +22,7 @@ import java.util.stream.Collectors;
 public class PanelController implements Initializable {
 
     @FXML
-    TableView filesTable;
+    TableView<FileInfo> filesTable;
 
     @FXML
     ComboBox<String>discsBox;
@@ -78,7 +80,17 @@ public class PanelController implements Initializable {
           discsBox.getSelectionModel().select(0);//отображается диск первый по умолчанию
         updateList(Paths.get("."));//способ в Java NIO создать пути
 
-
+          filesTable.setOnMouseClicked(new EventHandler<MouseEvent>() {//кликаем мышкой по файлам и папкам
+              @Override
+              public void handle(MouseEvent event) {
+                  if(event.getClickCount()==2){
+                     Path path=Paths.get(PathField.getText()).resolve(filesTable.getSelectionModel().getSelectedItem().getFileName());
+                  if(Files.isDirectory(path)){
+                      updateList(path);
+                  }
+                  }
+              }
+          });
     }
 
     public void updateList(Path path) {//метод который умеет из какого -то пути  по любому пути собрать список файлов
@@ -100,5 +112,11 @@ public class PanelController implements Initializable {
         if(upperPath!= null){
             updateList(upperPath);
         }
+    }
+
+    public void SelectDiskAction(ActionEvent actionEvent) {//метод,который позволяет при выборе диска попадать на этот диск
+        ComboBox<String> element=((ComboBox<String>)actionEvent.getSource());
+        updateList(Paths.get(element.getSelectionModel().getSelectedItem()));
+
     }
 }

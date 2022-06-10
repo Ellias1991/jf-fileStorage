@@ -9,7 +9,7 @@
 
 
     <HBox>
-        <ComboBox fx:id="discsBox"/>
+        <ComboBox fx:id="discsBox" onAction="#SelectDiskAction"/>
             <TextField fx:id="PathField" editable="false" HBox.hgrow="ALWAYS" />
         <Button text="Вверх" onAction="#bthPathUpAction" />
 

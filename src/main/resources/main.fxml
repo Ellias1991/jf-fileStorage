@@ -9,7 +9,7 @@
 
     <MenuBar>
         <Menu text="Файл">
-            <MenuItem text="Выйти из программы"/>
+            <MenuItem text="Выйти из программы" onAction="#btnExitAction"/>
         </Menu>
     </MenuBar>
 
@@ -19,10 +19,10 @@
     </HBox>
 
     <HBox spacing="5">
-        <Button maxWidth="Infinity" text="Копировать файл" HBox.hgrow="ALWAYS"/>
-        <Button maxWidth="Infinity" text="Переместить файл" HBox.hgrow="ALWAYS"/>
-        <Button maxWidth="Infinity" text="Удалить файл" HBox.hgrow="ALWAYS"/>
-        <Button maxWidth="Infinity" text="Выход из программы" HBox.hgrow="ALWAYS" onAction="#btnExitAction"/>
+        <Button maxWidth="Infinity" focusTraversable="false" text="Копировать файл" HBox.hgrow="ALWAYS" onAction="#copyBtnAction"/>
+        <Button maxWidth="Infinity" focusTraversable="false" text="Переместить файл" HBox.hgrow="ALWAYS"/>
+        <Button maxWidth="Infinity" focusTraversable="false" text="Удалить файл" HBox.hgrow="ALWAYS"/>
+        <Button maxWidth="Infinity" focusTraversable="false" text="Выход из программы" HBox.hgrow="ALWAYS" onAction="#btnExitAction"/>
 
 
         <padding>

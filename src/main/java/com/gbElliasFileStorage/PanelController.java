@@ -119,4 +119,14 @@ public class PanelController implements Initializable {
         updateList(Paths.get(element.getSelectionModel().getSelectedItem()));
 
     }
+    public String getSelectedFileName(){//какой файл выбран
+        if(filesTable.isFocused()){
+            return null;
+        }
+        return filesTable.getSelectionModel().getSelectedItem().getFileName();
+    }
+    public String getCurrentPath(){//куда указывает данная папка
+        return PathField.getText();
+
+    }
 }

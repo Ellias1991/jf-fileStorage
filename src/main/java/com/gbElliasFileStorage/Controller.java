@@ -1,34 +1,58 @@
 package com.gbElliasFileStorage;
 
 import javafx.application.Platform;
+
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.Initializable;
-import javafx.scene.control.Label;
-import javafx.scene.control.TableView;
+import javafx.scene.control.Alert;
+import javafx.scene.control.ButtonType;
+import javafx.scene.layout.VBox;
 
-import java.net.URL;
-import java.util.ResourceBundle;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 
-public class Controller implements Initializable {
 
-    @FXML
-    TableView filesTable;
+public class Controller {
+@FXML
+    VBox leftPanel, rightPanel;
 
-    @FXML
-    private Label welcomeText;
 
-    @FXML
-    protected void onHelloButtonClick() {
-        welcomeText.setText("Welcome to JavaFX Application!");
-    }
 
     public void btnExitAction(ActionEvent actionEvent) {
         Platform.exit();
     }
+    public void copyBtnAction(ActionEvent actionEvent){
 
-    @Override
-    public void initialize(URL location, ResourceBundle resources) {
+    PanelController leftPC= (PanelController) leftPanel.getProperties().get("ctrl");
+    PanelController rightPC= (PanelController) rightPanel.getProperties().get("ctrl");
 
-    }
+    if(leftPC.getSelectedFileName()== null && rightPC.getSelectedFileName()==null){
+        Alert alert= new Alert(Alert.AlertType.ERROR,"ни один файл не выбран", ButtonType.OK);
+        alert.showAndWait();
+        return;
+    };
+    PanelController srcPC= null, dstPC=null;///srcPC--откуда копируем, dstPC--куда копируем
+    if(leftPC.getSelectedFileName()!=null){
+        srcPC=leftPC;
+        dstPC=rightPC;
+    };
+        if(rightPC.getSelectedFileName()!=null){
+            srcPC=rightPC;
+            dstPC=leftPC;
+        };
+
+        Path srcPath= Paths.get(srcPC.getCurrentPath(), srcPC.getSelectedFileName());//что копируем
+        Path dstPath=Paths.get(dstPC.getCurrentPath()).resolve(srcPath.getFileName().toString());//куда копируем
+        try {
+            Files.copy(srcPath, dstPath);
+            dstPC.updateList(Paths.get(dstPC.getCurrentPath()));
+        }catch (IOException e){
+            Alert alert = new Alert(Alert.AlertType.ERROR,"не удалось скопировать указанный файл",ButtonType.OK);
+            alert.showAndWait();
+        }
+
+
+        }
 }

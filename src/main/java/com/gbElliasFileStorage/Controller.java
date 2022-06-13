@@ -19,6 +19,7 @@ public class Controller {
     VBox leftPanel, rightPanel;
 
 
+
     public void btnExitAction(ActionEvent actionEvent) {
         Platform.exit();
     }
@@ -51,5 +52,7 @@ public class Controller {
             Alert alert = new Alert(Alert.AlertType.ERROR,"не удалось скопировать указанный файл",ButtonType.OK);
             alert.showAndWait();
         }
-}
+
+
+        }
 }

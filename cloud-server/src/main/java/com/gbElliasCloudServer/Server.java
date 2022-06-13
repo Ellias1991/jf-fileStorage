@@ -1,7 +1,5 @@
 package com.gbElliasCloudServer;
 
-import com.sun.xml.internal.ws.api.model.wsdl.WSDLOutput;
-import com.sun.xml.internal.ws.wsdl.writer.document.PortType;
 
 import java.io.IOException;
 import java.net.ServerSocket;
